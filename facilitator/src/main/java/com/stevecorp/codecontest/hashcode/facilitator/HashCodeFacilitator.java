@@ -239,11 +239,11 @@ public class HashCodeFacilitator<T extends InputModel, U extends OutputModel> {
             this.progress = 0;
         }
 
-        void handleUpdate(final long score, final U output, final Class<? extends Algorithm> algorithmClass) {
+        synchronized void handleUpdate(final long score, final U output, final Class<? extends Algorithm> algorithmClass) {
             handleUpdate(score, output, algorithmClass, null);
         }
 
-        void handleUpdate(final long score, final U output, final Class<? extends Algorithm> algorithmClass, final Map<String, Object> parameters) {
+        synchronized void handleUpdate(final long score, final U output, final Class<? extends Algorithm> algorithmClass, final Map<String, Object> parameters) {
             progress++;
             if (outputs.size() < numberOfResultsToShow) {
                 outputs.add(new ScoreTracker_Element(score, output, algorithmClass, parameters));
